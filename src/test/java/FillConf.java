@@ -1,39 +1,24 @@
-package test;
+package runtest;
 
-import org.junit.jupiter.api.BeforeAll;
 import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-//import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
-public class FillForm {
+//import static com.codeborne.selenide.Selenide.$;
+
+public class FillConf extends runtest.BaseConf {
 
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1280x800";
+        Configuration.browserSize = "1920x2080";
 //        Configuration.
 //        String url = "https://demoqa.com/automation-practice-form";
     }
-    // вынести в отдельный класс инициализации
-    String firstName = "Alexander";
-    String lastName = "Georgievich";
-    String userEmail = "test@yandex.ru";
-    String genterWrapper = "Male";
-    String userNumber = "1122334455";
-    String calendarMonth = "February";
-    String calendarYear = "2000";
-    String calendarDay  = "10";
-    String subjectsInput = "Maths";
-    String hobbiesWrapper = "Sports";
-    String uploadPicture = "tools.png";
-    String currentAddress = "Moscow, Red Square, Building 1, App 01";
-
-
 
     @Test
     void successFillTest() {
@@ -59,9 +44,9 @@ public class FillForm {
         $("#state").click();
 
 // var- 1
-        $x("//*[@id='stateCity-wrapper']").$(byText("Haryana")).click();
+        $x("//*[@id='stateCity-wrapper']").$(byText(state)).scrollTo().click();
         $x("//div[@id='city']").click();
-        $x("//*[@id='stateCity-wrapper']").$(byText("Karnal")).click();
+        $x("//*[@id='stateCity-wrapper']").$(byText(city)).click();
 
 // var-2
 //        $x("//*[text() = 'Haryana']").click();
@@ -84,9 +69,10 @@ public class FillForm {
                 text(hobbiesWrapper),
                 text(uploadPicture),
                 text(currentAddress),
-                text("Haryana" + " " + "Karnal"));
+                text(state + " " + city));
 
         $("#closeLargeModal").click();
 //        sleep(20000);       //  *** отладка
+
     }
 }
